@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>FORZADO FULLSCREEN</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Chat Fullscreen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     html, body {
@@ -11,87 +11,18 @@
       padding: 0;
       height: 100%;
       overflow: hidden;
-      background: #fff;
     }
 
-    #zerviz-widget-frame {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw !important;
-      height: 100dvh !important;
+    iframe {
+      width: 100%;
+      height: 100%;
       border: 0;
-      z-index: 999999;
     }
   </style>
 </head>
 <body>
 
-<script>
-(function() {
-  var iframe = document.createElement('iframe');
-  iframe.id = 'zerviz-widget-frame';
-
-  // 🔥 TRUCO: parámetros extra para intentar abrir desde backend
-  iframe.src = 'https://proyectoz.cloud/?widget=1&embed=1&open=1&full=1';
-
-  document.body.appendChild(iframe);
-
-  var payload = {
-    "id": "campaign_1773931558880_4nfmb3",
-    "campaignKey": "campaign_1773931558880_4nfmb3",
-    "channel": "webchat",
-    "flowId": "webchat-copa-mngf2dvg",
-    "flowName": "copa",
-    "widgetId": "widget_1775155742857_9xljk9",
-    "widgetName": "Copa",
-    "widgetConfig": {
-      "primaryColor": "#0400ff",
-      "headerColor": "#002aff",
-      "backgroundColor": "#e5ddd5",
-      "title": "Copa Demo",
-      "subtitle": "Asistente automatico"
-    }
-  };
-
-  function spamMessages() {
-    if (!iframe.contentWindow) return;
-
-    // CONFIG
-    iframe.contentWindow.postMessage({
-      type: 'zerviz:campaign-embed-config',
-      payload: payload
-    }, '*');
-
-    // 🔥 SPAM DE APERTURA (forzado extremo)
-    iframe.contentWindow.postMessage({
-      type: 'zerviz:widget-frame-state',
-      payload: { open: true }
-    }, '*');
-
-    iframe.contentWindow.postMessage({
-      type: 'zerviz:open',
-      payload: true
-    }, '*');
-
-    iframe.contentWindow.postMessage({
-      type: 'zerviz:toggle',
-      payload: { open: true }
-    }, '*');
-  }
-
-  iframe.onload = function() {
-    // 🔥 SPAM INTENSIVO (esto rompe casi cualquier bloqueo)
-    let count = 0;
-    const interval = setInterval(() => {
-      spamMessages();
-      count++;
-      if (count > 20) clearInterval(interval);
-    }, 200);
-  };
-
-})();
-</script>
+<iframe src="https://proyectoz.cloud/"></iframe>
 
 </body>
 </html>
