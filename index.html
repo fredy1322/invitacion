@@ -1,175 +1,288 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Para Joyce 💖</title>
+  <meta charset="UTF-8">
+  <title>Demo Copa Airlines - ConnectMiles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+  <style>
     body {
-        margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        overflow: hidden;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
     }
 
-    .container {
-        text-align: center;
+    /* HEADER */
+    .header {
+      background: #0f3d99;
+      color: white;
+      padding: 15px 30px;
+      font-weight: bold;
     }
 
-    .btn {
-        padding: 15px 30px;
-        font-size: 20px;
-        border: none;
-        border-radius: 30px;
-        background-color: #ff4d6d;
-        color: white;
-        cursor: pointer;
-        transition: 0.3s;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    /* HERO */
+    .hero {
+      background: #0f3d99;
+      color: white;
+      padding: 60px 30px;
     }
 
-    .btn:hover {
-        transform: scale(1.1);
-        background-color: #ff1e4d;
+    .hero h1 {
+      margin: 0;
+      font-size: 48px;
+    }
+
+    .hero p {
+      margin-top: 15px;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    /* NAV ICONS */
+    .nav-icons {
+      background: white;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      border-bottom: 1px solid #ddd;
+      flex-wrap: wrap;
+    }
+
+    .nav-item {
+      text-align: center;
+      font-size: 14px;
+      color: #0f3d99;
+      cursor: pointer;
+    }
+
+    /* SECTION */
+    .section {
+      padding: 40px 30px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section h2 {
+      color: #0f3d99;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    /* CARDS */
+    .cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .card {
-        display: none;
-        background: white;
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        animation: fadeIn 1.5s ease forwards;
-        max-width: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      flex: 1;
+      min-width: 220px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      text-align: center;
     }
 
-    @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(30px);}
-        to {opacity: 1; transform: translateY(0);}
+    .card h3 {
+      color: #0f3d99;
+      font-size: 16px;
     }
 
-    h1 {
-        color: #ff4d6d;
+    .card p {
+      font-size: 14px;
+      color: #666;
     }
-
-    .heart {
-        font-size: 30px;
-        animation: pulse 1s infinite;
-    }
-
-    @keyframes pulse {
-        0% {transform: scale(1);}
-        50% {transform: scale(1.3);}
-        100% {transform: scale(1);}
-    }
-
-    .acciones {
-        margin-top: 20px;
-    }
-
-    .acciones button {
-        margin: 5px;
-        padding: 10px 20px;
-        border-radius: 20px;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    .si {
-        background-color: #ff4d6d;
-        color: white;
-    }
-
-    .obvio {
-        background-color: #ff85a1;
-        color: white;
-    }
-
-    .mensaje-final {
-        margin-top: 20px;
-        font-size: 18px;
-        color: #ff4d6d;
-        display: none;
-        animation: fadeIn 1s ease forwards;
-    }
-
-    .floating-hearts span {
-        position: absolute;
-        color: rgba(255,255,255,0.7);
-        animation: float 6s linear infinite;
-    }
-
-    @keyframes float {
-        0% {transform: translateY(100vh) scale(0);}
-        100% {transform: translateY(-10vh) scale(1);}
-    }
-</style>
+  </style>
 </head>
-
 <body>
 
-<div class="container">
-    <button class="btn" onclick="mostrarInvitacion()">Abrir 💌</button>
+  <div class="header">
+    COPA AIRLINES - DEMO
+  </div>
 
-    <div class="card" id="card">
-        <h1>Joyce 💖</h1>
+  <div class="hero">
+    <h1>ConnectMiles</h1>
+    <p>Acumula millas en tu prÃ³ximo viaje y disfruta de todos los beneficios.</p>
+  </div>
 
-        <p>Mañana quiero invitarte a algo especial... ✨</p>
-        <p>Un desayuno juntos en <strong>Emilios</strong> ☕🥐</p>
-        <p>Porque cada momento contigo sabe mejor ❤️</p>
+  <div class="nav-icons">
+    <div class="nav-item">Descubre</div>
+    <div class="nav-item">Reservar</div>
+    <div class="nav-item">Tarjetas</div>
+    <div class="nav-item">PreferProgram</div>
+    <div class="nav-item">Comprar millas</div>
+  </div>
 
-        <p class="heart">💖</p>
+  <div class="section">
+    <h2>Beneficios de PreferMembers</h2>
+    <p>
+      Acumula millas con Copa Airlines y disfruta beneficios exclusivos en tus viajes.
+    </p>
 
-        <p>¿Aceptas esta cita conmigo? 😍</p>
+    <div class="cards">
+      <div class="card">
+        <h3>Ascensos</h3>
+        <p>Recibe upgrades segÃºn tu estatus.</p>
+      </div>
 
-        <div class="acciones">
-            <button class="si" onclick="respuesta()">Sí 💕</button>
-            <button class="obvio" onclick="respuesta()">Obvio 😘</button>
-        </div>
+      <div class="card">
+        <h3>Equipaje</h3>
+        <p>Franquicia de equipaje diferenciada.</p>
+      </div>
 
-        <div class="mensaje-final" id="mensaje">
-            ¡Sabía que dirías que sí! 💖<br>
-            Entonces mañana es una cita en Emilios ☕✨
-        </div>
+      <div class="card">
+        <h3>PreferAccess</h3>
+        <p>Prioridad en Check-In y abordaje.</p>
+      </div>
+
+      <div class="card">
+        <h3>Beneficios</h3>
+        <p>Acumula y redime millas con aliados.</p>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="floating-hearts" id="hearts"></div>
+  <!-- ?? PEGA TU SCRIPT AQUÃ� -->
+<!-- Zerviz Campaign Widget Embed Code -->
+<!-- Zerviz Campaign Widget Embed Code -->
 
+
+
+<!-- Zerviz Campaign Widget Embed Code -->
+
+
+
+<!-- Zerviz Campaign Widget Embed Code --><!-- Zerviz Campaign Widget Embed Code -->
 <script>
-function mostrarInvitacion() {
-    document.querySelector('.btn').style.display = 'none';
-    document.getElementById('card').style.display = 'block';
-    generarCorazones();
-}
+  (function() {
+    // Create iframe for the widget
+    var iframe = document.createElement('iframe');
+    iframe.id = 'zerviz-widget-frame';
+    iframe.title = 'Copa';
+    iframe.style.position = 'fixed';
+    iframe.style.right = '16px';
+    iframe.style.bottom = '16px';
+    iframe.style.width = '108px';
+    iframe.style.height = '96px';
+    iframe.style.border = '0';
+    iframe.style.background = 'transparent';
+    iframe.style.zIndex = '2147483000';
+    iframe.style.overflow = 'visible';
+    iframe.setAttribute('loading', 'lazy');
+    iframe.setAttribute('allow', 'clipboard-write');
+    iframe.src = 'https://proyectoz.cloud/?widget=1&embed=1';
+    document.body.appendChild(iframe);
 
-function respuesta() {
-    document.getElementById('mensaje').style.display = 'block';
-}
+    var payload = {
+  "id": "campaign_1773931558880_4nfmb3",
+  "campaignKey": "campaign_1773931558880_4nfmb3",
+  "channel": "webchat",
+  "surveyCampaignId": "five9_campaign_1773937359620_80x1sa",
+  "surveyCampaignName": "chatencuesta",
+  "flowId": "webchat-copa-mngf2dvg",
+  "flowName": "copa",
+  "surveyEnabled": true,
+  "surveyFlowId": "webchat-encuesta-copa-mnggbhuy",
+  "surveyFlowName": "encuesta_copa",
+  "widgetId": "widget_1775155742857_9xljk9",
+  "widgetName": "Copa",
+  "widgetConfig": {
+    "primaryColor": "#0400ff",
+    "headerColor": "#002aff",
+    "backgroundColor": "#e5ddd5",
+    "userBubbleColor": "#dcf8c6",
+    "agentBubbleColor": "#ffffff",
+    "textColor": "#111b21",
+    "mutedColor": "#667781",
+    "fontFamily": "system",
+    "design": "rounded",
+    "borderRadius": 16,
+    "bodyPattern": "dots",
+    "launcherPosition": "right",
+    "title": "Copa Demo",
+    "subtitle": "Asistente automatico",
+    "profileImageUrl": "https://cdn.brandfetch.io/id7Krz3SDX/w/331/h/331/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667671653749",
+    "launcherIconUrl": "https://cdn.brandfetch.io/id7Krz3SDX/w/331/h/331/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667671653749"
+  }
+};
+    var iframeOrigin = 'https://proyectoz.cloud';
+    var mobileBreakpoint = 640;
 
-function generarCorazones() {
-    const container = document.getElementById('hearts');
+    function resizeFrame(isOpen) {
+      if (!iframe) return;
 
-    setInterval(() => {
-        const heart = document.createElement('span');
-        heart.innerHTML = '💖';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      if (isOpen) {
+        if (window.innerWidth <= mobileBreakpoint) {
+          iframe.style.right = '0';
+          iframe.style.bottom = '0';
+          iframe.style.width = '100vw';
+          iframe.style.height = '100vh';
+          return;
+        }
 
-        container.appendChild(heart);
+        iframe.style.right = '16px';
+        iframe.style.bottom = '16px';
+        iframe.style.width = '400px';
+        iframe.style.height = '720px';
+        return;
+      }
 
-        setTimeout(() => {
-            heart.remove();
-        }, 6000);
-    }, 300);
-}
+      if (window.innerWidth <= mobileBreakpoint) {
+        iframe.style.right = '12px';
+        iframe.style.bottom = '12px';
+      } else {
+        iframe.style.right = '16px';
+        iframe.style.bottom = '16px';
+      }
+      iframe.style.width = '108px';
+      iframe.style.height = '96px';
+    }
+
+    function sendEmbedConfig() {
+      if (!iframe || !iframe.contentWindow) return;
+      iframe.contentWindow.postMessage({
+        type: 'zerviz:campaign-embed-config',
+        payload: payload
+      }, '*');
+    }
+
+    window.addEventListener('resize', function() {
+      resizeFrame(iframe && iframe.dataset.open === 'true');
+    });
+
+    iframe.addEventListener('load', function() {
+      resizeFrame(false);
+      sendEmbedConfig();
+      setTimeout(sendEmbedConfig, 350);
+      setTimeout(sendEmbedConfig, 1200);
+    });
+
+    window.addEventListener('message', function(event) {
+      if (event.origin !== iframeOrigin) return;
+      if (!event.data || event.data.type !== 'zerviz:widget-frame-state') return;
+      var isOpen = Boolean(event.data.payload && event.data.payload.open);
+      iframe.dataset.open = isOpen ? 'true' : 'false';
+      resizeFrame(isOpen);
+    });
+
+    iframe.dataset.open = 'false';
+    resizeFrame(false);
+    setTimeout(sendEmbedConfig, 1600);
+  })();
 </script>
+
+
+
+
+
+
 
 </body>
 </html>
