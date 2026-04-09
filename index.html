@@ -3,25 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Widget Fullscreen</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      width: 100%;
       height: 100%;
       overflow: hidden;
       background: #fff;
     }
 
-    iframe {
+    #zerviz-widget-frame {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh; /* clave para Safari */
       border: 0;
+      z-index: 999999;
+
+      /* evita recorte en iPhone */
+      padding-bottom: env(safe-area-inset-bottom);
     }
   </style>
 </head>
@@ -30,7 +33,9 @@
 <script>
 (function() {
   var iframe = document.createElement('iframe');
+  iframe.id = 'zerviz-widget-frame';
   iframe.src = 'https://proyectoz.cloud/?widget=1&embed=1';
+
   document.body.appendChild(iframe);
 
   var payload = {
@@ -50,21 +55,27 @@
     }
   };
 
-  // Enviar config varias veces (esto suele arreglar el blanco)
-  function sendConfig() {
-    if (iframe.contentWindow) {
-      iframe.contentWindow.postMessage({
-        type: 'zerviz:campaign-embed-config',
-        payload: payload
-      }, '*');
-    }
+  function sendAll() {
+    if (!iframe.contentWindow) return;
+
+    // CONFIG
+    iframe.contentWindow.postMessage({
+      type: 'zerviz:campaign-embed-config',
+      payload: payload
+    }, '*');
+
+    // 🔥 FORZAR ABIERTO
+    iframe.contentWindow.postMessage({
+      type: 'zerviz:widget-frame-state',
+      payload: { open: true }
+    }, '*');
   }
 
   iframe.onload = function() {
-    sendConfig();
-    setTimeout(sendConfig, 500);
-    setTimeout(sendConfig, 1500);
-    setTimeout(sendConfig, 3000);
+    sendAll();
+    setTimeout(sendAll, 500);
+    setTimeout(sendAll, 1200);
+    setTimeout(sendAll, 2500);
   };
 
 })();
