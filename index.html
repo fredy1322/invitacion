@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Widget Fullscreen Auto Open</title>
+  <title>FORZADO FULLSCREEN</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <style>
@@ -18,8 +18,8 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100dvh;
+      width: 100vw !important;
+      height: 100dvh !important;
       border: 0;
       z-index: 999999;
     }
@@ -31,7 +31,9 @@
 (function() {
   var iframe = document.createElement('iframe');
   iframe.id = 'zerviz-widget-frame';
-  iframe.src = 'https://proyectoz.cloud/?widget=1&embed=1&open=1';
+
+  // 🔥 TRUCO: parámetros extra para intentar abrir desde backend
+  iframe.src = 'https://proyectoz.cloud/?widget=1&embed=1&open=1&full=1';
 
   document.body.appendChild(iframe);
 
@@ -48,56 +50,44 @@
       "headerColor": "#002aff",
       "backgroundColor": "#e5ddd5",
       "title": "Copa Demo",
-      "subtitle": "Asistente automatico",
-          "profileImageUrl": "https://cdn.brandfetch.io/id7Krz3SDX/w/331/h/331/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667671653749",
-    "launcherIconUrl": "https://cdn.brandfetch.io/id7Krz3SDX/w/331/h/331/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667671653749"
+      "subtitle": "Asistente automatico"
     }
   };
 
-  function sendConfig() {
+  function spamMessages() {
     if (!iframe.contentWindow) return;
 
+    // CONFIG
     iframe.contentWindow.postMessage({
       type: 'zerviz:campaign-embed-config',
       payload: payload
     }, '*');
-  }
 
-  function forceOpen() {
-    try {
-      var doc = iframe.contentWindow.document;
+    // 🔥 SPAM DE APERTURA (forzado extremo)
+    iframe.contentWindow.postMessage({
+      type: 'zerviz:widget-frame-state',
+      payload: { open: true }
+    }, '*');
 
-      // intenta encontrar el botón launcher
-      var btn = doc.querySelector('button, .launcher, [role="button"]');
+    iframe.contentWindow.postMessage({
+      type: 'zerviz:open',
+      payload: true
+    }, '*');
 
-      if (btn) {
-        btn.click();
-        return true;
-      }
-    } catch (e) {
-      // Safari bloquea acceso cross-origin → normal
-    }
-    return false;
+    iframe.contentWindow.postMessage({
+      type: 'zerviz:toggle',
+      payload: { open: true }
+    }, '*');
   }
 
   iframe.onload = function() {
-    sendConfig();
-
-    // Reintentos de config
-    setTimeout(sendConfig, 500);
-    setTimeout(sendConfig, 1200);
-    setTimeout(sendConfig, 2000);
-
-    // 🔥 Intentar abrir automáticamente varias veces
-    var tries = 0;
-    var interval = setInterval(function() {
-      var opened = forceOpen();
-      tries++;
-
-      if (opened || tries > 10) {
-        clearInterval(interval);
-      }
-    }, 500);
+    // 🔥 SPAM INTENSIVO (esto rompe casi cualquier bloqueo)
+    let count = 0;
+    const interval = setInterval(() => {
+      spamMessages();
+      count++;
+      if (count > 20) clearInterval(interval);
+    }, 200);
   };
 
 })();
