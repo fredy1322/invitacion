@@ -2,33 +2,35 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Demo Copa Airlines - ConnectMiles</title>
+  <title>Widget Fullscreen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #fff;
+    }
 
+    iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
 
-
-
-<!-- Zerviz Campaign Widget Embed Code --><!-- Zerviz Campaign Widget Embed Code -->
 <script>
 (function() {
   var iframe = document.createElement('iframe');
-  iframe.id = 'zerviz-widget-frame';
-  iframe.title = 'Copa';
-
-  // FULLSCREEN SIEMPRE
-  iframe.style.position = 'fixed';
-  iframe.style.top = '0';
-  iframe.style.left = '0';
-  iframe.style.width = '100vw';
-  iframe.style.height = '100vh';
-  iframe.style.border = '0';
-  iframe.style.background = '#fff';
-  iframe.style.zIndex = '999999';
-
-  iframe.setAttribute('allow', 'clipboard-write');
   iframe.src = 'https://proyectoz.cloud/?widget=1&embed=1';
-
   document.body.appendChild(iframe);
 
   var payload = {
@@ -42,25 +44,31 @@
     "widgetConfig": {
       "primaryColor": "#0400ff",
       "headerColor": "#002aff",
+      "backgroundColor": "#e5ddd5",
       "title": "Copa Demo",
       "subtitle": "Asistente automatico"
     }
   };
 
-  iframe.addEventListener('load', function() {
-    iframe.contentWindow.postMessage({
-      type: 'zerviz:campaign-embed-config',
-      payload: payload
-    }, '*');
-  });
+  // Enviar config varias veces (esto suele arreglar el blanco)
+  function sendConfig() {
+    if (iframe.contentWindow) {
+      iframe.contentWindow.postMessage({
+        type: 'zerviz:campaign-embed-config',
+        payload: payload
+      }, '*');
+    }
+  }
+
+  iframe.onload = function() {
+    sendConfig();
+    setTimeout(sendConfig, 500);
+    setTimeout(sendConfig, 1500);
+    setTimeout(sendConfig, 3000);
+  };
 
 })();
 </script>
-
-
-
-
-
 
 </body>
 </html>
