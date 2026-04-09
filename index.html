@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Widget Fullscreen</title>
+  <title>Widget Fullscreen Auto Open</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <style>
@@ -19,12 +19,9 @@
       top: 0;
       left: 0;
       width: 100vw;
-      height: 100dvh; /* clave para Safari */
+      height: 100dvh;
       border: 0;
       z-index: 999999;
-
-      /* evita recorte en iPhone */
-      padding-bottom: env(safe-area-inset-bottom);
     }
   </style>
 </head>
@@ -51,33 +48,56 @@
       "headerColor": "#002aff",
       "backgroundColor": "#e5ddd5",
       "title": "Copa Demo",
-      "subtitle": "Asistente Demo",
-      "profileImageUrl": "https://cdn.brandfetch.io/id7Krz3SDX/w/331/h/331/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667671653749",
+      "subtitle": "Asistente automatico",
+          "profileImageUrl": "https://cdn.brandfetch.io/id7Krz3SDX/w/331/h/331/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667671653749",
     "launcherIconUrl": "https://cdn.brandfetch.io/id7Krz3SDX/w/331/h/331/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1667671653749"
     }
   };
 
-  function sendAll() {
+  function sendConfig() {
     if (!iframe.contentWindow) return;
 
-    // CONFIG
     iframe.contentWindow.postMessage({
       type: 'zerviz:campaign-embed-config',
       payload: payload
     }, '*');
+  }
 
-    // 🔥 FORZAR ABIERTO
-    iframe.contentWindow.postMessage({
-      type: 'zerviz:widget-frame-state',
-      payload: { open: true }
-    }, '*');
+  function forceOpen() {
+    try {
+      var doc = iframe.contentWindow.document;
+
+      // intenta encontrar el botón launcher
+      var btn = doc.querySelector('button, .launcher, [role="button"]');
+
+      if (btn) {
+        btn.click();
+        return true;
+      }
+    } catch (e) {
+      // Safari bloquea acceso cross-origin → normal
+    }
+    return false;
   }
 
   iframe.onload = function() {
-    sendAll();
-    setTimeout(sendAll, 500);
-    setTimeout(sendAll, 1200);
-    setTimeout(sendAll, 2500);
+    sendConfig();
+
+    // Reintentos de config
+    setTimeout(sendConfig, 500);
+    setTimeout(sendConfig, 1200);
+    setTimeout(sendConfig, 2000);
+
+    // 🔥 Intentar abrir automáticamente varias veces
+    var tries = 0;
+    var interval = setInterval(function() {
+      var opened = forceOpen();
+      tries++;
+
+      if (opened || tries > 10) {
+        clearInterval(interval);
+      }
+    }, 500);
   };
 
 })();
